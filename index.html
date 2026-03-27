@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TaskFlow</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      background: #f4f6f8;
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .section {
+      background: white;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #111;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #333;
+    }
+
+    .task {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #eef1f5;
+      padding: 10px;
+      margin: 6px 0;
+      border-radius: 6px;
+    }
+
+    .delete-btn {
+      background: red;
+      padding: 5px 10px;
+      width: auto;
+    }
+
+    .section button{
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>TaskFlow</h1>
+
+<div class="section">
+  <h3>Signup</h3>
+  <input id="signupEmail" placeholder="Email">
+  <input id="signupPassword" placeholder="Password">
+  <button onclick="signup()">Signup</button>
+</div>
+
+<div class="section">
+  <h3>Login</h3>
+  <input id="loginEmail" placeholder="Email">
+  <input id="loginPassword" placeholder="Password">
+  <button onclick="login()">Login</button>
+</div>
+
+<div class="section">
+  <h3>Tasks</h3>
+  <input id="taskInput" placeholder="New Task">
+  <button onclick="addTask()">Add Task</button>
+  <ul id="taskList"></ul>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
