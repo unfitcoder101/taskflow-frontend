@@ -1,6 +1,6 @@
 console.log("NEW VERSION LOADED 🚀")
 
-const BASE_URL = "https://taskflow-backend.onrender.com"
+const BASE_URL = "https://taskflow-backend101.onrender.com"
 
 // SIGNUP
 async function signup(){
@@ -9,7 +9,9 @@ async function signup(){
 
   const res = await fetch(`${BASE_URL}/auth/signup`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { 
+      "Content-Type": "application/json"
+    },
     body: JSON.stringify({
       email: emailInput.value,
       password: passwordInput.value
@@ -17,7 +19,7 @@ async function signup(){
   })
 
   const data = await res.json()
-  console.log(data)
+  console.log("SIGNUP:", data)
 
   emailInput.value = ""
   passwordInput.value = ""
@@ -30,7 +32,9 @@ async function login(){
 
   const res = await fetch(`${BASE_URL}/auth/login`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { 
+      "Content-Type": "application/json"
+    },
     body: JSON.stringify({
       email: emailInput.value,
       password: passwordInput.value
@@ -38,7 +42,12 @@ async function login(){
   })
 
   const data = await res.json()
-  console.log(data)
+  console.log("LOGIN:", data)
+
+  if(!data.token){
+    console.log("Login failed")
+    return
+  }
 
   localStorage.setItem("token", data.token)
 
@@ -52,6 +61,11 @@ async function login(){
 async function addTask(){
   const input = document.getElementById("taskInput")
   const token = localStorage.getItem("token")
+
+  if(!token){
+    console.log("No token found")
+    return
+  }
 
   await fetch(`${BASE_URL}/tasks`, {
     method: "POST",
@@ -90,7 +104,14 @@ async function getTasks(){
     }
   })
 
-  const tasks = await res.json()
+  const data = await res.json()
+
+  if(!Array.isArray(data)){
+    console.log("ERROR:", data)
+    return
+  }
+
+  const tasks = data
 
   const list = document.getElementById("taskList")
   list.innerHTML = ""
@@ -103,7 +124,7 @@ async function getTasks(){
     span.textContent = t.task
 
     const btn = document.createElement("button")
-    btn.textContent = "Delete"
+    btn.textContent = "❌"
     btn.className = "delete-btn"
     btn.onclick = () => deleteTask(t._id)
 
